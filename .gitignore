@@ -1,0 +1,18 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/.idea/
+
+# rspec failure tracking
+.rspec_status
+
+.idea/inspectionProfiles/
+/.idea/zodiac_clock.iml
+/.idea/workspace.xml
+/.idea/inspectionProfiles/profiles_settings.xml
