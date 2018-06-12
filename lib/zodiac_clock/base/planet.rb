@@ -1,50 +1,109 @@
-require 'time'
-require '../../../lib/zodiac_clock/support/degree'
-
+# Planet class
 class Planet
-  attr_reader :planet, :symbol, :roman_deide, :greek_god, :hindu_god,	:connection, :european_meaning,
-              :vedic_meaning, :position, :hour, :minute, :fraction, :proportion
+  attr_reader :planet, :symbol,	:connection, :signs, :latitude, :longitude
 
-  def initialize(planet, symbol, roman_deide, greek_god, hindu_god, connection, european_meaning, vedic_meaning, birthdate)
-    @planet               = planet
-    @symbol               = symbol
-    @roman_deide          = roman_deide
-    @greek_god            = greek_god
-    @hindu_god            = hindu_god
-    @connection           = connection
-    @european_meaning     = european_meaning
-    @vedic_meaning        = vedic_meaning
-    @year                 = birthdate.year
-    @month                = birthdate.month
-    @day                  = birthdate.day
-    @hour                 = birthdate.hour
-    @minute               = birthdate.minute
-
-    perform
+  def initialize(planet, latitude, longitude)
+    @planet = planet.to_sym
+    @latitude = latitude
+    @longitude = longitude
+    set_symbol
+    set_connection
+    set_sign
   end
 
-  def perform
-    superior_limit  = Degree.new()
-    inferior_limit  = Degree.new()
+  private
 
-    @fraction       = (@hour + @minute.to_f / 60) / 24
+  def set_symbol
+    @symbol = case @planet
+                when :sun
+                  '☉'
+                when :moon
+                  '☽︎'
+                when :mercury
+                  '☿'
+                when :venus
+                  '♀'
+                when :mars
+                  '♂'
+                when :ceres
+                  '⚳'
+                when :jupiter
+                  '♃'
+                when :saturn
+                  '♄'
+                when :uranus
+                  '⛢'
+                when :neptune
+                  '♆'
+                when :pluto
+                  '♇'
+              end
+  end
 
-    @difference_arc = Degree.new(
-        superior_limit.degrees - inferior_limit.degrees,
-        superior_limit.minutes - inferior_limit.minutes,
-        superior_limit.seconds - inferior_limit.seconds
-    )
+  def set_connection
+    @connection = case planet
+                    when :sun
+                      :ancient
+                    when :moon
+                      :ancient
+                    when :mercury
+                      :ancient
+                    when :venus
+                      :ancient
+                    when :mars
+                      :ancient
+                    when :ceres
+                      :modern
+                    when :jupiter
+                      :ancient
+                    when :saturn
+                      :ancient
+                    when :uranus
+                      :modern
+                    when :neptune
+                      :modern
+                    when :pluto
+                      :modern
+                  end
+  end
 
-    @proportion = Degree.new(
-        @fraction * @difference_arc.degrees,
-        @fraction * @difference_arc.minutes,
-        @fraction * @difference_arc.seconds
-    )
-
-    @position = Degree.new(
-                          inferior_limit.degrees + @difference_arc.degrees,
-                          inferior_limit.minutes + @difference_arc.minutes,
-                          inferior_limit.seconds + @difference_arc.seconds
-    )
+  def set_sign
+    @signs = case planet
+               when :sun
+                 [:lion]
+               when :moon
+                 [:cancer]
+               when :mercury
+                 [:gemini, :virgo]
+               when :venus
+                 [:taurus, :libra]
+               when :mars
+                 [:aries]
+               when :ceres
+                 []
+               when :jupiter
+                 [:sagittarius]
+               when :saturn
+                 [:capricornius]
+               when :uranus
+                 [:aquarius]
+               when :neptune
+                 [:pisces]
+               when :pluto
+                 [:scorpio]
+             end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+

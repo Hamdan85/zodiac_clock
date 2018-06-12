@@ -16,9 +16,67 @@ class House
   attr_reader :title
   attr_reader :interpretation
 
-  def initialize(number, title, interpretation)
-    @number             = number
-    @title              = title
-    @interpretation     = interpretation
+  def initialize(number)
+    @number = number
+    set_titles
+    set_interpretation
+  end
+
+  def set_titles
+    @title = case number
+               when 1
+                 "Life"
+               when 2
+                 "Wealth"
+               when 3
+                 "Brothers"
+               when 4
+                 "Parent"
+               when 5
+                 "Children"
+               when 6
+                 "Health"
+               when 7
+                 "Spouse"
+               when 8
+                 "Death"
+               when 9
+                 "Journeys"
+               when 10
+                 "Kingdom"
+               when 11
+                 "Friendship"
+               when 12
+                 "Prison"
+             end
+  end
+
+  def set_interpretation
+    @interpretation = case number
+                        when 1
+                          "House of Self"
+                        when 2
+                          "House of Value"
+                        when 3
+                          "House of Communications"
+                        when 4
+                          "House of Home"
+                        when 5
+                          "House of Pleasure"
+                        when 6
+                          "House of Health"
+                        when 7
+                          "House of Partnerships"
+                        when 8
+                          "House of Reincarnation"
+                        when 9
+                          "House of Philosophy"
+                        when 10
+                          "House of Social"
+                        when 11
+                          "House of Friendships"
+                        when 12
+                          "House of Self-Undoing"
+                      end
   end
 end
